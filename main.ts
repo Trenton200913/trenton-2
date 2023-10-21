@@ -2,19 +2,35 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, l
     game.setGameOverMessage(false, "Mr QUENCH take over Brunston land")
     game.gameOver(false)
 })
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    Trenton,
+    assets.animation`Goatman`,
+    200,
+    false
+    )
+    controller.moveSprite(Trenton, 150, 0)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Trenton.vy == 0) {
         Trenton.vy = -111
     }
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
-    game.setGameOverMessage(true, "more levels coming soon")
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
+    game.setGameOverMessage(true, "More updates soon")
     game.gameOver(true)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`jungle2`)
+})
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+	
 })
 let Trenton: Sprite = null
 Trenton = sprites.create(assets.image`Trenton`, SpriteKind.Player)
 controller.moveSprite(Trenton, 100, 0)
-tiles.setCurrentTilemap(tilemap`level`)
+tiles.placeOnRandomTile(Trenton, assets.tile`myTile2`)
+tiles.setCurrentTilemap(tilemap`jungle1`)
 scene.cameraFollowSprite(Trenton)
 scene.setBackgroundImage(img`
     6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
@@ -138,5 +154,8 @@ scene.setBackgroundImage(img`
     6666666666666666666666666666666666666666666ffffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffffff666666666666666666666666666666666666666666666666666666666
     6666666666666666666666666666666666666666666ffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffffffff666666666666666666666666666666666666666666666666666666666
     `)
-music.play(music.createSong(assets.song`Jungle`), music.PlaybackMode.LoopingInBackground)
+music.play(music.createSong(assets.song`Jungle theme`), music.PlaybackMode.LoopingInBackground)
 Trenton.ay = 160
+game.onUpdate(function () {
+	
+})

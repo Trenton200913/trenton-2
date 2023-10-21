@@ -1,34 +1,59 @@
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
-    game.setGameOverMessage(false, "Mr QUENCH take over Brunston land")
-    game.gameOver(false)
-})
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    Trenton,
-    assets.animation`Goatman`,
-    200,
-    false
-    )
-    controller.moveSprite(Trenton, 150, 0)
+    controller.moveSprite(Trenton, 190, 0)
+    ProjectTileControil()
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
+    if (true) {
+        game.setGameOverMessage(true, "More updates soon")
+        game.gameOver(true)
+    }
+    if (false) {
+        QUENCHlings = sprites.create(assets.image`QUENCHling`, SpriteKind.Enemy)
+        QUENCHlings.ay = 160
+        QUENCHlings.follow(Trenton, 100)
+        tiles.placeOnRandomTile(QUENCHlings, assets.tile`myTile6`)
+        OnGoatMan()
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
+    game.setGameOverMessage(false, "Mr QUENCH toked over Brunston land")
+    game.gameOver(false)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Trenton.vy == 0) {
         Trenton.vy = -111
     }
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
-    game.setGameOverMessage(true, "More updates soon")
-    game.gameOver(true)
-})
+function OnGoatMan () {
+    GoatMan = sprites.create(assets.image`GoatMan`, SpriteKind.Player)
+    GoatMan.follow(Trenton, 160)
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
-    tiles.setCurrentTilemap(tilemap`jungle2`)
+    if (true) {
+        tiles.setCurrentTilemap(tilemap`jungle2`)
+        sprites.destroy(QUENCHlings, effects.spray, 500)
+        tiles.placeOnRandomTile(Trenton, assets.tile`myTile2`)
+    }
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprites.destroy(QUENCHlings, effects.fire, 5000)
+    info.changeScoreBy(1)
+    scene.cameraShake(4, 1000)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
-	
+    game.setGameOverMessage(false, "Mr QUENCH toked over Brunston land")
+    game.gameOver(false)
+    game.setDialogCursor(assets.image`QUENCHling`)
 })
+function ProjectTileControil () {
+    Uzi = sprites.createProjectileFromSprite(assets.image`Uzi bullet`, Trenton, 50, 0)
+}
+let Uzi: Sprite = null
+let GoatMan: Sprite = null
+let QUENCHlings: Sprite = null
 let Trenton: Sprite = null
 Trenton = sprites.create(assets.image`Trenton`, SpriteKind.Player)
-controller.moveSprite(Trenton, 100, 0)
+controller.moveSprite(Trenton, 190, 0)
 tiles.placeOnRandomTile(Trenton, assets.tile`myTile2`)
 tiles.setCurrentTilemap(tilemap`jungle1`)
 scene.cameraFollowSprite(Trenton)
@@ -156,6 +181,11 @@ scene.setBackgroundImage(img`
     `)
 music.play(music.createSong(assets.song`Jungle theme`), music.PlaybackMode.LoopingInBackground)
 Trenton.ay = 160
-game.onUpdate(function () {
-	
+info.setLife(10)
+OnGoatMan()
+game.onUpdateInterval(5000, function () {
+    QUENCHlings = sprites.create(assets.image`QUENCHling`, SpriteKind.Enemy)
+    QUENCHlings.ay = 160
+    tiles.placeOnRandomTile(QUENCHlings, assets.tile`myTile6`)
+    QUENCHlings.follow(Trenton, 100)
 })

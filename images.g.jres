@@ -24,6 +24,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "GoatMan"
     },
+    "image6": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//w8AAAAAAH9/9wAAAAAAf3d3DwAAAAB/f/cAAAAAAP//D/AAAAAAAADw8AAAAAAAAAD/AAAAAAAA//8AAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "QUENCHlings"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
